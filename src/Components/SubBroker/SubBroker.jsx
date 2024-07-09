@@ -67,7 +67,7 @@ const SubBroker = () => {
             />
         </div>
         <div style={{display:"flex", justifyContent:"flex-end", paddingRight : "5px", marginBottom:"1rem"}}>
-          <Image src={load} width={50} height={50} style={{height : "40px", width : "40px"}} onClick={fetchPartners}/>
+          <Image src={load} width={50} height={50} style={{height : "40px", width : "40px"}} alt={load} onClick={fetchPartners}/>
         </div>
         <div className="showPartners">
           <table className="data-table">
