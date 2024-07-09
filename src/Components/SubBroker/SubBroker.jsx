@@ -2,14 +2,12 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig.js";
-import "./Contact.css";
 import load from "../../../src/assests/load.png"
 import { Button, Select, MenuItem } from "@mui/material";
 import Image from "next/image.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import "./SubBroker.css"
 
-const Contact = () => {
+const SubBroker = () => {
   const [contacts, setContacts] = useState([]);
   const [filteredPartners, setFilteredPartners] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -18,7 +16,7 @@ const Contact = () => {
 
   const fetchPartners = async () => {
     try {
-      const contactsRef = collection(db, "contacts");
+      const contactsRef = collection(db, "subBroker");
       const snapshot = await getDocs(contactsRef);
       const contactsList = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -60,7 +58,7 @@ const Contact = () => {
     <div>
       <div className="showPartnersPage">
           <div className="search">
-            <h1 className="head">Contact Us</h1>
+            <h1 className="head">Sub Broker</h1>
             <input
               placeholder="Search"
               className="contact_input"
@@ -77,7 +75,7 @@ const Contact = () => {
               <tr>
                 <th>Name</th>
                 <th>Subject</th>
-                <th>Message</th>
+                <th>Questions</th>
                 <th>Phone Number</th>
               </tr>
             </thead>
@@ -88,7 +86,7 @@ const Contact = () => {
                   <tr key={partner.id}>
                     <td>{partner.name}</td>
                     <td>{partner.msg_subject}</td>
-                    <td>{partner.message}</td>
+                    <td>{partner.message} ?</td>
                     <td>{partner.phone_number}</td>
                   </tr>
                 ))}
@@ -128,4 +126,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default SubBroker;

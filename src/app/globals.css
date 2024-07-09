@@ -6,7 +6,7 @@
   padding: 0;
   margin:0;
   width:100%;
-  overflow:hidden;
+  /* overflow:hidden; */
 }
 
 
@@ -88,7 +88,8 @@ p {
 .content {
   flex: 1; /* Take up remaining space beside Sidebar */
   padding: 5rem 1rem;
-  overflow-y: auto; /* Enable scrolling if content overflows */
+  margin-left: 1.5rem;
+  height:fit-content
 }
 
 .search {
@@ -97,8 +98,9 @@ p {
   margin-bottom: 1.5rem;
   margin-top: 0.5rem;
   justify-content: space-between;
+  align-items: center;
   padding-left: 1px;
-  padding-right: 20px;
+  /* padding-right: 20px; */
 }
 .head {
   font-size: 33px;
@@ -106,16 +108,20 @@ p {
   text-transform: uppercase;
   margin-left:3px;
 }
-.contact_input{
+.contact_input {
   padding: 0.6rem;
-  max-width: 250px;
-  border-radius: 5px;
-  
+  width: 70%;
+  border-radius: 1px;
+  font-size: 16px;
+  height: 2.5rem;
+  color: #ccc; /* Light text color */
+  border: 1px solid #ddd; /* Light border color */
 }
 
 @media (max-width:748px){
   .search{
     flex-direction: column;
     gap:2rem;
+    width:70%;
   }
 }

@@ -31,6 +31,7 @@ import {
   orderBy,
   updateDoc,
 } from "firebase/firestore";
+import load from "../../../src/assests/load.png";
 // import { toast } from "react-toastify";
 import { toast } from "react-hot-toast";
 // import load from "../../../assets/images/load.png";
@@ -289,14 +290,24 @@ const UnlistedShares = () => {
         <div className="search">
           <h1 className="head">Unlisted Shares</h1>
           <input
-            placeholder="search.."
+            placeholder="Search.."
             className="contact_input"
             value={searchQuery} // Bind input value to searchQuery state
             onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
           />
         </div>
 
-        <div className="" style={{width:"100%", display:"flex", justifyContent:"end", paddingRight:"3rem"}}>
+        <div
+          className=""
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between" ,
+            flexWrap: "wrap",
+            paddingRight: "3rem",
+            marginBottom: "2rem",
+          }}
+        >
           <Button
             sx={{
               width: "10rem",
@@ -310,8 +321,14 @@ const UnlistedShares = () => {
           >
             Add Shares
           </Button>
+          <Image
+            src={load}
+            width={20}
+            height={20}
+            style={{ height: "40px", width: "40px" }}
+          />
           {/* <div style={{ display: "flex", justifyContent: "end" }}> */}
-            {/* <Image
+          {/* <Image
               height={40}
               width={40}
               style={{ cursor: "pointer", marginTop: "", marginLeft: "5px" }}
@@ -376,22 +393,20 @@ const UnlistedShares = () => {
           </tbody>
         </table>
         <div className="pagination">
-        <Button
-             sx={{width:"10rem"}}
-              onClick={() => handleChangePage(page - 1)}
-              disabled={page === 0}
-              startIcon={<ArrowBackIcon />}
-            >
-              Previous
-            </Button>
           <Button
-            sx={{ width: "10rem" }}
+            sx={{ width: "6rem" }}
+            onClick={() => handleChangePage(page - 1)}
+            disabled={page === 0}
+          >
+            Previous
+          </Button>
+          <Button
+            sx={{ width: "6rem" }}
             onClick={() => handleChangePage(page + 1)}
             disabled={
               page >= Math.ceil(filteredMakeups.length / rowsPerPage) - 1
             }
             variant="outlined"
-            startIcon={<ArrowForwardIcon />}
           >
             Next
           </Button>
@@ -402,7 +417,7 @@ const UnlistedShares = () => {
             sx={{ width: "10rem" }}
           >
             {[10, 25, 50, 100].map((size) => (
-              <option key={size} value={size} sx={{width:"10rem"}}>
+              <option key={size} value={size} sx={{ width: "10rem" }}>
                 {size}
               </option>
             ))}
@@ -410,7 +425,7 @@ const UnlistedShares = () => {
         </div>
       </div>
       <Dialog open={makeupDialogOpen}>
-        <DialogTitle>Add New Makeup</DialogTitle>
+        <DialogTitle>Add Shares</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -585,7 +600,7 @@ const UnlistedShares = () => {
           >
             <label htmlFor="file-archive-upload">
               <Paper sx={{ p: 2, m: 1, cursor: "pointer" }}>
-                <h2 style={{textAlign:"center"}}>
+                <h2 style={{ textAlign: "center" }}>
                   <CloudUploadIcon />{" "}
                 </h2>
                 <input

@@ -1,5 +1,7 @@
 .makeups {
   padding: 1rem;
+  box-shadow: 2px 8px 30px 0 #00000040;
+  height:fit-content;
 }
 
 .makeupsPage button {

@@ -1,17 +1,17 @@
 .sidebar {
   width: 16rem;
-  height: 100vh;
+  height: 85vh;
+  background-color: rgb(84, 102, 249,0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
   /* overflow-y: scroll; */
   overflow-x: hidden;
-  background-color: rgb(84, 102, 249, 0.2);
+  margin: 0.5rem;
   margin-bottom: 0;
   transition: all 500ms ease-in-out;
   position: sticky;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  margin-top: 4rem;
+  margin-top: 6rem;
 }
 
 .sidebar > div > div img {
@@ -44,10 +44,12 @@
 .sidebar div h2 {
   width: 100%;
   text-align: left;
+  background-color: rgb(84, 102, 249,0.9);
   padding: 0.8rem 0.4rem;
   padding-left: 1rem;
-  font-weight: 700;
-  font-size: 1.5rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  letter-spacing: 0.2rem;
   margin-bottom: 0.2rem;
   border-radius: 0.75rem;
 }
@@ -55,7 +57,7 @@
 .sidebar div a {
   color: #424242;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .sidebar > div {
@@ -68,17 +70,14 @@
   border-bottom: 1px solid #c8c8c8;
 }
 
-.menu_hidden{
-  display:none
-}
-#sideClicked {
-  border-top-left-radius: 1rem;
-  border-end-start-radius: 1rem;
-  border-top-right-radius: 0;
-  border-end-end-radius: 0;
-  padding-left: 0.5rem;
-  border: 1px solid #f496ac;
-  background-color: #f496ac4d;
+.sideClicked {
+    border-top-left-radius: 1rem;
+    border-end-start-radius: 1rem;
+    border-top-right-radius: 0;
+    border-end-end-radius: 0;
+    padding-left: 0.5rem;
+    border: 1px solid rgb(84, 102, 249,0.5);
+    background-color: rgb(84, 102, 249,0.5);
 }
 
 .sidebar > div > div {
@@ -86,17 +85,17 @@
   display: flex;
   flex-direction: row;
   justify-content: left;
-  padding: 1rem 0.2rem;
+  padding: 0.5rem 0.2rem;
   margin-left: 1.5rem;
   gap: 0.3rem;
   border-radius: 0.5rem;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out ;
   cursor: pointer;
 }
 
 .sidebar > div > div:hover {
-  transform: scale(1.1);
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transform: scale(1.1);
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 #helpdesk,
@@ -110,9 +109,6 @@
 }
 
 @media screen and (max-width: 800px) {
-  .menu_hidden{
-    display:block
-  }
   .side {
     display: none;
     position: absolute;
@@ -134,26 +130,4 @@
   .hero > div:nth-child(1) {
     justify-content: start;
   }
-
-  .hideNavBar {
-    position: fixed;
-    left: -100%;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    transition: all 1s ease-in-out;
-  }
-
-  
-}
-
-.active {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: black;
-  height: 100%;
-  width: 100%;
-  padding: 1rem;
-  transition: all 0.5s ease-in-out;
 }

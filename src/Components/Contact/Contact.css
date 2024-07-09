@@ -1,12 +1,15 @@
 /* Existing CSS */
 .showPartners {
   padding: 1rem;
+  box-shadow: 2px 8px 30px 0 #00000040;
+  height:fit-content;
 }
 .showPartnersPage button {
   color: black;
   font-size: 0.8rem;
   border: 1px solid black;
 }
+
 .showPartnersPage button:disabled {
   color: rgba(0, 0, 0, 0.5);
   border: 1px solid rgba(0, 0, 0, 0.5);

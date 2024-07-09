@@ -1,13 +1,38 @@
 "use client";
-import React, { useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import "./Header.css";
-
-import { useRouter } from "next/navigation";
+import { AppContext } from "@/Context/AppContext";
+import { signOut } from "firebase/auth";
+import { useRouter } from "next/navigation"; 
+import logout from "../../assests/safal_logout.webp"
 import { auth } from "../../firebase/firebaseConfig";
 import Image from "next/image";
-// import logout from "../../assets/images/logout.png";
-const Header = ({handleToggle, toggle}) => {
-  
+// import logout from "../../assets/images/logout.png"
+const Header = () => {
+  const { sidebar, isOpen, removeSidebar } = useContext(AppContext);
+  const toggle = useRef(null);
+  const router = useRouter()
+  const toggleHandler = () => {
+    if (toggle.current && sidebar.current) {
+      // Add guards to ensure refs are not null
+      if (isOpen) {
+        toggle.current.classList.add("toggle");
+        toggle.current.classList.remove("cross");
+        sidebar.current.classList.add("side");
+        sidebar.current.classList.remove("sideblur");
+      } else {
+        toggle.current.classList.add("cross");
+        toggle.current.classList.remove("toggle");
+        sidebar.current.classList.remove("side");
+        sidebar.current.classList.add("sideblur");
+      }
+    }
+  };
+
+  useEffect(() => {
+    toggleHandler();
+  }, [isOpen]);
+
   const handleLogout = async () => {
     try {
       await signOut(auth);
@@ -20,23 +45,19 @@ const Header = ({handleToggle, toggle}) => {
   return (
     <div className="header">
       <a href="/">
-        <h1>Safal Admin</h1>
+        <h1>Safal Admin Panel</h1>
       </a>
-
-      <button className="logout" onClick={handleLogout}>
+      <button className="logout" onClick={handleLogout} >
         {/* <div> */}
-        {/* <Image
-          src={logout}
-          alt="logout"
-          width={35}
-          height={35}
-          className="img"
-        /> */}
+          <Image src={logout} alt="logout" className="img" style={{width:"40px", height:"40px"}}/>
         {/* </div> */}
-        Log Out
+        <p>Log Out</p>
       </button>
-
-      <button onClick={handleToggle} className="menu_hidden">Show</button>
+      <button onClick={removeSidebar} className={isOpen ? "toggle" : "cross"} >
+        <div></div>
+        <div></div>
+        <div></div>
+      </button>
     </div>
   );
 };

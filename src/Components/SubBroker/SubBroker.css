@@ -1,0 +1,402 @@
+/* Existing CSS */
+.showPartners {
+    padding: 1rem;
+    box-shadow: 2px 8px 30px 0 #00000040;
+    height:fit-content;
+  }
+  .showPartnersPage button {
+    color: black;
+    font-size: 0.8rem;
+    border: 1px solid black;
+  }
+  
+  .showPartnersPage button:disabled {
+    color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+  }
+  .showPartnersPage button:hover {
+    border-color: #F496AC;
+    background-color: #f496ac1f;
+  }
+  .showPartners > table th {
+    padding: 1rem;
+    padding-bottom: 1.5rem;
+    border-right: 1px solid rgb(147, 147, 147);
+  }
+  .buttonLayout .active-filter {
+    background-color: rgba(250, 226, 231, 0.8);
+    border-color: #F496AC;
+  }
+  .showPartners > table th:nth-last-child(1) {
+    border: none;
+  }
+  .showPartners > table td {
+    border-top: 1px solid black;
+    padding: 1rem;
+  }
+  .showPartners > table tr:nth-last-child(1) {
+    border-bottom: 1px solid black;
+  }
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.2rem;
+    background-color: #fff;
+  }
+  .data-table th {
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  .data-table td {
+    font-weight: 400;
+    font-size: 0.8rem;
+  }
+  .data-table > tbody > tr:nth-child(even) {
+    background-color: rgb(84, 102, 249, 0.2)
+  }
+  .pagination {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: right;
+    gap: 1rem;
+  }
+  .pagination select {
+    padding: 5px;
+    color: black;
+    border: 1px solid black;
+    border-radius: 0%;
+  }
+  .buttonLayout {
+    width: 100%;
+    display: flex;
+    gap:1rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+  }
+  @media screen and (max-width: 1000px) {
+    .buttonLayout {
+      width: 90%;
+      flex-wrap: wrap;
+      justify-content: left;
+      gap: 1rem;
+    }
+    .showPartners {
+      margin-top: 0;
+    }
+    .pagination {
+      width: 90%;
+    }
+  }
+  @media (max-width: 500px) {
+    .data-table th,
+    .data-table td {
+      display: block;
+      width: 100%;
+    }
+    .data-table th {
+      background-color: rgb(84, 102, 249);
+      color: white;
+      text-align: right;
+      padding-right: 20px;
+      position: relative;
+    }
+    .data-table th::after {
+      content: ":";
+      position: absolute;
+      right: 10px;
+    }
+    .data-table td {
+      text-align: right;
+      padding-left: 50%;
+      position: relative;
+    }
+    .data-table td::before {
+      content: attr(data-label);
+      position: absolute;
+      left: 10px;
+      white-space: nowrap;
+      font-weight: bold;
+    }
+  }
+  .modalBox {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  .modalBox #modal-title {
+    font-weight: 600;
+  }
+  .modalBox #modal-description {
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  .modalActions {
+    display: flex;
+  }
+  .modalActions label {
+    display: flex;
+    align-items: center;
+  }
+  .modalButtons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  .modalActions input[type="radio"] {
+    margin-right: 5px;
+  }
+  .modalActions input[type="radio"]:checked::before {
+    color: rgb(84, 102, 249, 0.2);
+    font-size: 20px;
+  }
+  .view {
+    /* color: #F496AC; */
+    font-size: 1rem;
+    margin-right: 0.4rem;
+    cursor: pointer;
+  }
+  .view:hover {
+    color: black;
+  }
+  .edit {
+    /* color: #F496AC; */
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  .edit:hover {
+    color: black;
+  }
+  /* Modal */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* .modal-overlay */
+  .modal {
+    /* margin-top:5rem; */
+    /* height:20rem; */
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    /* width:800px; */
+    /* overflow-y: scroll; */
+  }
+  .options {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-around;
+    gap: 1px;
+  }
+  .options label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-center;
+    gap: 0.3rem;
+  }
+  .buttons button {
+    margin-left: 10px;
+  }
+  .confirm,
+  .cancel {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    color: black;
+    /* font-weight: 600; */
+    text-transform: uppercase;
+  }
+  .cancel {
+    background-color: rgba(250, 226, 231, 0.8);
+    opacity: 0.7;
+    border: 1px solid black;
+    /* outline: none; */
+  }
+  .confirm {
+    background-color: rgba(250, 226, 231, 0.9);
+    opacity: 0.7;
+    border: 1px solid black;
+    /* outline: none; */
+  }
+  .confirm:hover,
+  .cancel:hover {
+    background-color: aliceblue(84, 102, 249, 0.2);
+  }
+  /* .select-container {
+    position: relative;
+  } */
+  .select-container select:focus {
+    outline: none;
+  }
+  /* .stat {
+    margin-right: 1rem;
+  } */
+  .select-container select option {
+    background-color: rgba(250, 226, 231, 0.8);
+  }
+  /* Document model */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5rem;
+    /* overflow-y: scroll; */
+    /* padding-bottom:5rem; */
+  }
+  .modal-content {
+    text-align: center;
+  }
+  .close-modal {
+    padding: 8px 16px;
+    margin-top: 20px;
+    background-color: #F496AC;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .close-modal:hover {
+    background-color: #EC748B;
+  }
+  .modal-content {
+    text-align: center;
+  }
+  .close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 8px 16px;
+    background-color: #F496AC;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .hello-content {
+    margin-top: 20px;
+  }
+  .flex-col-1 {
+    display: block;
+  }
+  .flex-col-1 h2 {
+    text-decoration: underline;
+  }
+  
+  .row-1 h1 {
+    text-decoration: underline;
+    margin-top: 1rem;
+  }
+  .row-1 {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    gap: 5rem;
+  }
+  @media screen and (max-width: 768px) {
+    .row-1 {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+  }
+  .row {
+    margin-top: 1rem;
+  }
+  .row_2_1 {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    /* width:20rem; */
+  }
+  .row_2_1 div {
+    width: 10rem;
+  }
+  .row_2_1 a {
+    color: #EC748B;
+  }
+  @media screen and (max-width: 768px) {
+    .row_2_1 {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .modal {
+      overflow-y: scroll;
+      height: 40rem;
+    }
+  }
+  @media screen and (max-width: 600px) {
+    .modal {
+      overflow-y: scroll;
+      height: 25rem;
+    }
+    .heading {
+      font-size: 1.5rem;
+    }
+    .status_modal {
+      height: fit-content;
+    }
+  }
+  /*  */
+  .button_gap {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+  .search {
+    
+    display: flex;
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    justify-content: space-between;
+    padding-left: 1px;
+    padding-right: 20px;
+  }
+  .head {
+    font-size: 33px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-left:3px;
+  }
+  #vieww p {
+    font-size: 0.7rem !important;
+  }
+  
+  /* Add this CSS to reduce the width of the first column on larger screens */
+  @media screen and (min-width: 1000px) {
+    .data-table th,
+    .data-table td {
+      width: 10%;
+      text-align: center;
+    }
+  }
+  
+  
