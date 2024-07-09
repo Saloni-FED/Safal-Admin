@@ -1,7 +1,7 @@
 .sidebar {
   width: 16rem;
   height: 85vh;
-  background-color: rgb(84, 102, 249,0.3);
+  background-color: rgb(84, 102, 249, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -44,16 +44,19 @@
 .sidebar div h2 {
   width: 100%;
   text-align: left;
-  background-color: rgb(84, 102, 249,0.9);
+  background-color: rgb(84, 102, 249, 0.9);
   padding: 0.8rem 0.4rem;
   padding-left: 1rem;
   font-weight: 600;
-  font-size: 1.2rem;
-  letter-spacing: 0.2rem;
+  font-size: 1.3rem;
   margin-bottom: 0.2rem;
   border-radius: 0.75rem;
+  color: white;
 }
-
+.sidebar div {
+  display: flex;
+  align-items: center;
+}
 .sidebar div a {
   color: #424242;
   font-weight: 600;
@@ -71,13 +74,13 @@
 }
 
 .sideClicked {
-    border-top-left-radius: 1rem;
-    border-end-start-radius: 1rem;
-    border-top-right-radius: 0;
-    border-end-end-radius: 0;
-    padding-left: 0.5rem;
-    border: 1px solid rgb(84, 102, 249,0.5);
-    background-color: rgb(84, 102, 249,0.5);
+  border: 1px solid rgb(84, 102, 249, 0.5);
+  background-color: rgb(84, 102, 249, 0.5);
+  border-top-left-radius: 1rem;
+  border-end-start-radius: 1rem;
+  border-top-right-radius: 0;
+  border-end-end-radius: 0;
+  padding-left: 0.5rem;
 }
 
 .sidebar > div > div {
@@ -89,13 +92,13 @@
   margin-left: 1.5rem;
   gap: 0.3rem;
   border-radius: 0.5rem;
-  transition: all 0.2s ease-in-out ;
+  transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
 .sidebar > div > div:hover {
-    transform: scale(1.1);
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  transform: scale(1.1);
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 #helpdesk,

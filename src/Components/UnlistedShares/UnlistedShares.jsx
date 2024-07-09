@@ -41,6 +41,7 @@ import "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
+import addIcon from "../../assests/addIcon.png";
 import "./UnlistedShares.css";
 
 const UnlistedShares = () => {
@@ -114,7 +115,7 @@ const UnlistedShares = () => {
   };
 
   const handleAddMakeup = async () => {
-    // if (newMakeup.trim() === "") return;
+    if (name.trim() === "" || price.trim() === "") return;
     const mid = `MID${Date.now()}`;
     setMakeupDialogOpen(false);
 
@@ -142,12 +143,22 @@ const UnlistedShares = () => {
         imageUrl: imageURL,
       });
 
-      setDivId("button-0");
+      // fetchMakeups();
+      // setDivId("button-0");
+      // console.log(makeups);
+      // toast.success("Makeup added Successfully");
+
       fetchMakeupsCategories();
-      console.log(makeups);
-      toast.success("Makeup added Successfully");
+      setDivId("button-0");
+
+      // console.log(makeupsData);
+      if (unlistedShares) {
+        toast.success("Shares added Successfully");
+      }
       setName("");
       setPrice("");
+      setImage(null);
+      setImagePreview("");
     } catch (error) {
       toast.error("Error adding Makeup ");
       console.error("Error adding makeup:", error);
@@ -302,7 +313,7 @@ const UnlistedShares = () => {
           style={{
             width: "100%",
             display: "flex",
-            justifyContent: "space-between" ,
+            justifyContent: "space-between",
             flexWrap: "wrap",
             paddingRight: "3rem",
             marginBottom: "2rem",
@@ -326,6 +337,7 @@ const UnlistedShares = () => {
             width={20}
             height={20}
             style={{ height: "40px", width: "40px" }}
+            alt={load}
           />
           {/* <div style={{ display: "flex", justifyContent: "end" }}> */}
           {/* <Image
@@ -425,26 +437,39 @@ const UnlistedShares = () => {
         </div>
       </div>
       <Dialog open={makeupDialogOpen}>
-        <DialogTitle>Add Shares</DialogTitle>
+        <DialogTitle>Add New Shares</DialogTitle>
         <DialogContent>
           <TextField
-            autoFocus
-            margin="dense"
-            label="Name"
-            type="text"
             fullWidth
+            variant="filled"
+            label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            sx={{ mt: 2 }}
           />
+
           <TextField
-            margin="dense"
+            variant="filled"
+            sx={{ mt: 2 }}
             label="Price"
-            type="text"
+            type="number"
             fullWidth
             value={price}
             onChange={(e) => setPrice(e.target.value)}
-            inputProps={{ pattern: "^[9-9][0-9]*$" }}
-            helperText="Enter a number 9 or higher"
+            inputProps={{
+              min: 0,
+              max: 100,
+              onKeyDown: (event) => {
+                if (
+                  event.key === "-" ||
+                  event.key === "+" ||
+                  event.key === "e" ||
+                  event.key === "E"
+                ) {
+                  event.preventDefault();
+                }
+              },
+            }}
           />
 
           <span className="uploadImg1" onClick={() => setOpenImageDialog(true)}>
@@ -453,17 +478,29 @@ const UnlistedShares = () => {
             ) : (
               <>
                 <AddPhotoAlternateOutlinedIcon sx={{ fontSize: "6rem" }} />
-                <p>Upload Image</p>
+                <p style={{ textAlign: "center" }}>Upload Image</p>
               </>
             )}
           </span>
         </DialogContent>
         <DialogActions>
           <Button
+            sx={{
+              width: "fit-content",
+              backgroundColor: "rgb(84, 102, 249)",
+
+              borderColor: "rgb(84, 102, 249, 0.3)",
+              color: "white",
+              "&:hover": {
+                backgroundColor:
+                  archiveOrUpload === "archive"
+                    ? "rgb(84, 102, 249)"
+                    : "rgb(84, 102, 249, 0.9)",
+              },
+            }}
             onClick={() => {
               setMakeupDialogOpen(false);
               setIsEdit(false);
-              setNewMakeup("");
               setImage(null);
               setImagePreview("");
             }}
@@ -471,6 +508,19 @@ const UnlistedShares = () => {
             Cancel
           </Button>
           <Button
+            sx={{
+              width: "fit-content",
+              backgroundColor: "rgb(84, 102, 249)",
+
+              borderColor: "rgb(84, 102, 249, 0.3)",
+              color: "white",
+              "&:hover": {
+                backgroundColor:
+                  archiveOrUpload === "archive"
+                    ? "rgb(84, 102, 249)"
+                    : "rgb(84, 102, 249, 0.9)",
+              },
+            }}
             onClick={isEdit ? handleEditMakeup : handleAddMakeup}
             color="secondary"
           >
@@ -503,37 +553,47 @@ const UnlistedShares = () => {
           display="flex"
           justifyContent="center"
           alignItems="center"
-          sx={{ p: 2 }}
+          sx={{ p: 2, gap: 2 }}
         >
           <Button
             variant={archiveOrUpload === "upload" ? "contained" : "outlined"}
             onClick={() => setArchiveOrUpload("upload")}
-            sx={
-              archiveOrUpload === "upload"
-                ? { mr: 2 } // Add margin-right for spacing
-                : {
-                    backgroundColor: "transparent",
-                    // borderColor: " rgb(84, 102, 249, 0.2)",
-                    color: "black",
-                    textAlign: "center",
-                    mr: 2, // Add margin-right for spacing
-                  }
-            }
+            sx={{
+              width: "fit-content",
+              backgroundColor:
+                archiveOrUpload === "upload"
+                  ? "rgb(84, 102, 249)"
+                  : "transparent",
+              borderColor: "rgb(84, 102, 249, 0.3)",
+              color: archiveOrUpload === "upload" ? "white" : "black",
+              "&:hover": {
+                backgroundColor:
+                  archiveOrUpload === "upload"
+                    ? "rgb(84, 102, 249)"
+                    : "rgb(84, 102, 249, 0.1)",
+              },
+            }}
           >
             Upload
           </Button>
           <Button
             variant={archiveOrUpload === "upload" ? "outlined" : "contained"}
             onClick={() => setArchiveOrUpload("archive")}
-            sx={
-              archiveOrUpload === "archive"
-                ? {}
-                : {
-                    // backgroundColor: "rgb(84, 102, 249, 0.2)",
-                    // borderColor: "#f496ac",
-                    color: "black",
-                  }
-            }
+            sx={{
+              width: "fit-content",
+              backgroundColor:
+                archiveOrUpload === "archive"
+                  ? "rgb(84, 102, 249)"
+                  : "transparent",
+              borderColor: "rgb(84, 102, 249, 0.3)",
+              color: archiveOrUpload === "archive" ? "white" : "black",
+              "&:hover": {
+                backgroundColor:
+                  archiveOrUpload === "archive"
+                    ? "rgb(84, 102, 249)"
+                    : "rgb(84, 102, 249, 0.1)",
+              },
+            }}
           >
             Archive
           </Button>
@@ -544,15 +604,15 @@ const UnlistedShares = () => {
             <Box
               p={1}
               display="flex"
-              justifyContent={"center"}
-              alignItems={"center"}
+              justifyContent="center"
+              alignItems="center"
               sx={{
                 cursor: "pointer",
                 width: 500,
                 height: 300,
-                backgroundColor: "rgb(84, 102, 249, 0.2)",
+                backgroundColor: "rgb(84, 102, 249, 0.3)",
                 margin: "2rem",
-                // border: "1px solid #f496ac",
+                border: "1px solid rgb(84, 102, 249, 0.3)",
                 "@media (max-width:800px)": {
                   width: 250,
                   height: 200,
@@ -564,10 +624,17 @@ const UnlistedShares = () => {
                 mt={1}
                 variant="h5"
                 gutterBottom
-                style={{ cursor: "pointer", textAlign: "center" }}
+                style={{
+                  cursor: "pointer",
+                  textAlign: "center",
+                  display: "flex",
+                  justifyContent: " center",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
               >
-                <CloudUploadIcon style={{ marginTop: "1rem" }} />{" "}
-                <span>Upload</span>
+                <CloudUploadIcon />
+                Upload
               </Typography>
               <input
                 id="file-upload"
@@ -585,10 +652,11 @@ const UnlistedShares = () => {
         ) : (
           <Box
             p={2}
-            display={"flex"}
-            justifyContent={"center"}
-            alignItems={"center"}
-            flexWrap={"wrap"}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            flexWrap="wrap"
+            gap={2}
             sx={{
               cursor: "pointer",
               width: 580,
@@ -599,10 +667,27 @@ const UnlistedShares = () => {
             }}
           >
             <label htmlFor="file-archive-upload">
-              <Paper sx={{ p: 2, m: 1, cursor: "pointer" }}>
-                <h2 style={{ textAlign: "center" }}>
-                  <CloudUploadIcon />{" "}
-                </h2>
+              <Paper
+                sx={{
+                  p: 2,
+                  cursor: "pointer",
+                  textAlign: "center",
+                  flexBasis: {
+                    xs: "100%", // Full width on small screens
+                    sm: "calc(50% - 8px)", // Half width on small screens with gap
+                    md: "calc(25% - 8px)", // Quarter width on medium and larger screens with gap
+                  },
+                }}
+              >
+                <Image
+                  src={addIcon}
+                  alt="Archive"
+                  style={{
+                    width: 80,
+                    height: 80,
+                    objectFit: "contain",
+                  }}
+                />
                 <input
                   id="file-archive-upload"
                   hidden
@@ -612,25 +697,38 @@ const UnlistedShares = () => {
                 />
               </Paper>
             </label>
-            {archive.map((item, index) => (
-              <Paper
-                key={index}
-                sx={{ p: 2, m: 1, cursor: "pointer" }}
-                onClick={() => {
-                  handleSetArchiveImage(item.ImageUrl);
-                }}
-              >
-                <img
-                  src={item.ImageUrl}
-                  alt="Archive"
-                  style={{
-                    width: 80,
-                    height: 80,
-                    objectFit: "contain",
+            {archive.map((item, index) =>
+              item.ImageUrl ? (
+                <Paper
+                  key={index}
+                  sx={{
+                    p: 2,
+                    cursor: "pointer",
+                    textAlign: "center",
+                    flexBasis: {
+                      xs: "100%", // Full width on small screens
+                      sm: "calc(50% - 8px)", // Half width on small screens with gap
+                      md: "calc(25% - 8px)", // Quarter width on medium and larger screens with gap
+                    },
                   }}
-                />
-              </Paper>
-            ))}
+                  onClick={() => {
+                    handleSetArchiveImage(item.ImageUrl);
+                  }}
+                >
+                  <img
+                    src={item.ImageUrl}
+                    alt="Archive"
+                    style={{
+                      width: 100,
+                      height: 100,
+                      objectFit: "contain",
+                    }}
+                  />
+                </Paper>
+              ) : (
+                " "
+              )
+            )}
           </Box>
         )}
       </Dialog>

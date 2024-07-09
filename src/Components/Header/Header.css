@@ -9,7 +9,7 @@
   position: fixed;
   z-index: 10;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  background-color: rgba(84, 102, 249, 0.9); /* Corrected color function */
+  background-color: rgba(84, 102, 249); /* Corrected color function */
 }
 
 .header h1 {

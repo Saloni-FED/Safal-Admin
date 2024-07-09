@@ -18,6 +18,10 @@
   border-color: #F496AC;
   background-color: #f496ac1f;
 }
+
+.showPartners > table > tr{
+  border-top: 1px solid black
+}
 .showPartners > table th {
   padding: 1rem;
   padding-bottom: 1.5rem;

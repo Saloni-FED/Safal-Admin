@@ -6,6 +6,8 @@ import { auth } from "../../firebase/firebaseConfig";
 import "./Login.css";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import safal from "../../assests/newlogo.png";
 
 export default function Login() {
   const router = useRouter();
@@ -18,7 +20,7 @@ export default function Login() {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Signed in sucessfully");
-      router.push("/entry")
+      router.push("/entry");
     } catch (error) {
       setError(error.message);
     }
@@ -27,7 +29,22 @@ export default function Login() {
   return (
     <div className="container">
       <form onSubmit={handleLogin} className="form">
-        <h2 style={{ textAlign: "center", marginBottom: "1rem" }}>Login</h2>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Image
+            src={safal}
+            width={100}
+            height={100}
+            alt="safal"
+            style={{ margin: "1.5rem auto" , width:"20rem" }}
+          />
+        </div>
+
         <input
           type="email"
           placeholder="Email"
