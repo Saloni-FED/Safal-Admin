@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 // import safal from "../../assests/newlogo.png";
+import newLogo from "../../../src/assests/newLogo.png"
 
 export default function Login() {
   const router = useRouter();
@@ -36,13 +37,13 @@ export default function Login() {
             alignItems: "center",
           }}
         >
-          {/* <Image
-            src={safal}
+          <Image
+            src={newLogo}
             width={100}
             height={100}
             alt="safal"
             style={{ margin: "1.5rem auto" , width:"20rem" }}
-          /> */}
+          />
         </div>
 
         <input
