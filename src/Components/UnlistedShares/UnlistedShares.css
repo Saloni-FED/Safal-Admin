@@ -1,0 +1,205 @@
+.makeups {
+  padding: 1rem;
+}
+
+.makeupsPage button {
+  color: black;
+  font-size: 0.8rem;
+  border: 1px solid black;
+}
+
+.uploadImg1 {
+  width: 94%;
+  background-color: rgb(84, 102, 249, 0.2);
+  border: 1px solid rgb(84, 102, 249, 0.2);
+  display: flex;
+  margin: 1rem;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  gap: 1rem;
+  padding: 1rem;
+  color: rgba(0, 0, 0, 0.548);
+}
+
+.amb {
+  width: 100%;
+  display: flex;
+ justify-content: flex-end;
+}
+
+#newBtn {
+  background-color: var(--mainColor);
+  color: white;
+  font-size: 0.8rem;
+  border: none;
+  font-weight: bold;
+}
+
+.makeupsPage button:disabled {
+  color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.makeupsPage button:hover,
+#newBtn:hover {
+  border-color: var(--mainColor);
+  background-color: var(--mainColor);
+  color: white;
+  border: 1px solid var(--mainColor);
+}
+
+.makeups > table th {
+  padding: 1rem;
+  padding-bottom: 1.5rem;
+  border-right: 1px solid rgb(147, 147, 147);
+}
+
+.makeups > table th:nth-last-child(1) {
+  border: none;
+}
+
+.makeups > table td {
+  border-top: 1px solid black;
+  padding: 1rem;
+}
+
+.makeups > table tr:nth-last-child(1) {
+  border-bottom: 1px solid black;
+}
+
+/* Base styles */
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2rem;
+  background-color: #fff;
+}
+
+.data-table th {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.data-table td {
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+.data-table > tbody > tr:nth-child(even) {
+  background-color: rgb(84, 102, 249, 0.2)
+}
+
+/* .data-table > tbody > tr > td:nth-last-child(1) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+} */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: right;
+  gap: 1rem;
+}
+
+.pagination select {
+  padding: 5px;
+  color: black;
+  border: 1px solid black;
+  border-radius: 0%;
+}
+
+.buttonLayoutScroll {
+  width: 100%; /* Ensure the container takes the full width of its parent */
+  display: flex;
+  justify-content: flex-start; /* Align items to the left */
+  gap: 2rem; /* Adds space between items */
+  margin: 1rem 0; /* Adds vertical margin */
+  overflow-x: scroll; /* Forces horizontal scrollbar */
+  overflow-y: hidden; /* Hides vertical overflow */
+  white-space: nowrap; /* Prevents items from wrapping to the next line */
+  box-sizing: border-box; /* Includes padding and border in the element's total width */
+  padding-bottom: 10px; /* Add space at the bottom for the scrollbar */
+  scroll-behavior: smooth; /* Smooth scrolling */
+}
+
+.buttonLayoutScroll input {
+  width: 12rem;
+}
+
+.buttonLayoutScroll button {
+  flex: 0 0 auto; /* Prevents buttons from shrinking or growing */
+}
+
+#clicked {
+  border-color: var(--mainColor);
+  background-color: #f496ac1f;
+}
+
+@media screen and (max-width: 1000px) {
+  .buttonLayout {
+    width: 90%;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .showMakeups {
+    margin-top: 0;
+  }
+  .pagination {
+    width: 90%;
+  }
+}
+
+@media (max-width: 500px) {
+  .data-table th,
+  .data-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .data-table th {
+    background-color: rgb(84, 102, 249, 0.2);
+    color: white;
+    text-align: right;
+    padding-right: 20px;
+    position: relative;
+  }
+
+  .data-table th::after {
+    content: ":";
+    position: absolute;
+    right: 10px;
+  }
+
+  .data-table td {
+    text-align: right;
+    padding-left: 50%;
+    position: relative;
+  }
+
+  .data-table td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 10px;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+}
+
+
+@media screen and (min-width: 1000px) {
+  .data-table th,
+  .data-table td {
+    width: 10%;
+    text-align: center;
+  }
+
+  
+}

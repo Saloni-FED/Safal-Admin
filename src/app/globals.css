@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&display=swap");
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin:0;
+  width:100%;
+  overflow:hidden;
+}
+
+
+:root {
+  --fontFamily: "Lato", sans-serif;
+  --fontFamily2: "Open Sans", sans-serif;
+  --mainColor: #5466f9;
+  --optionalColor: #00a79d;
+  --whiteColor: #ffffff;
+  --blackColor: #000000;
+  --paragraphColor: #666666;
+  --fontSize: 15px;
+  --transition: 0.5s;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  color: var(--blackColor);
+  font-size: var(--fontSize);
+  font-family: var(--fontFamily);
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--blackColor);
+  font-family: var(--fontFamily2);
+  font-weight: 700;
+}
+
+a {
+  transition: var(--transition);
+  color: var(--blackColor);
+  text-decoration: none;
+  outline: 0 !important;
+}
+a:hover {
+  color: var(--mainColor);
+  text-decoration: none;
+}
+
+:focus {
+  outline: 0 !important;
+}
+
+
+
+p {
+  color: var(--paragraphColor);
+  font-size: var(--fontSize);
+  margin-bottom: 15px;
+  line-height: 1.8;
+}
+
+
+/* Layout.module.css */
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Ensure full viewport height */
+}
+
+.hero {
+  display: flex;
+  flex: 1; /* Fill remaining vertical space */
+}
+
+.content {
+  flex: 1; /* Take up remaining space beside Sidebar */
+  padding: 5rem 1rem;
+  overflow-y: auto; /* Enable scrolling if content overflows */
+}
+
+.search {
+  
+  display: flex;
+  margin-bottom: 1.5rem;
+  margin-top: 0.5rem;
+  justify-content: space-between;
+  padding-left: 1px;
+  padding-right: 20px;
+}
+.head {
+  font-size: 33px;
+  font-weight: bolder;
+  text-transform: uppercase;
+  margin-left:3px;
+}
+.contact_input{
+  padding: 0.6rem;
+  max-width: 250px;
+  border-radius: 5px;
+  
+}
+
+@media (max-width:748px){
+  .search{
+    flex-direction: column;
+    gap:2rem;
+  }
+}
