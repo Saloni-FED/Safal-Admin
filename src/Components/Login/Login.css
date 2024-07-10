@@ -33,8 +33,12 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: large;
+    transition: all  0.2s ease-in-out;
   }
   
+  .button:hover{
+    background-color:  rgba(84, 102, 249, 0.5);
+  }
   
   .error {
     color: red;

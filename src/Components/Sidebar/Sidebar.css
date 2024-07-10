@@ -1,11 +1,11 @@
 .sidebar {
   width: 16rem;
   height: 90vh;
-  background-color: rgb(84, 102, 249, 0.3);
+  background-color: rgba(84, 103, 249, 0.147);
   display: flex;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
+  overflow-y: scroll;
   overflow-x: hidden;
   margin: 0.5rem;
   margin-bottom: 0;
@@ -48,6 +48,7 @@
   padding: 0.8rem 0.4rem;
   padding-left: 1rem;
   font-weight: 600;
+  letter-spacing: 0.2rem;
   font-size: 1.3rem;
   margin-bottom: 0.2rem;
   border-radius: 0.75rem;
@@ -58,7 +59,7 @@
   align-items: center;
 }
 .sidebar div a {
-  color: #424242;
+  color: hsla(0, 0%, 18%, 0.996);
   font-weight: 600;
   font-size: 1rem;
 }
@@ -97,7 +98,7 @@
 }
 
 .sidebar > div > div:hover {
-  transform: scale(1.1);
+  transform: scale(1.15);
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 

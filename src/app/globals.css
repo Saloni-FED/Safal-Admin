@@ -22,11 +22,21 @@
 
 *::-webkit-scrollbar-thumb:hover {
   border-color: var(--mainColor);
-  background-color: rgba(84, 102, 249, 0.3); /* Color of the scrollbar thumb on hover */
+  background-color: rgba(
+    84,
+    102,
+    249,
+    0.3
+  ); /* Color of the scrollbar thumb on hover */
 }
 
 *::-webkit-scrollbar-track {
-  background-color: rgba(84, 102, 249, 0.3); /* Background color of the scrollbar track */
+  background-color: rgba(
+    84,
+    102,
+    249,
+    0.3
+  ); /* Background color of the scrollbar track */
 }
 
 :root {
@@ -150,7 +160,7 @@ p {
   font-size: 16px;
   height: 2.5rem;
   color: black;
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
 }
 
 @media (max-width: 748px) {
@@ -161,8 +171,73 @@ p {
     margin-bottom: 0;
     margin-top: 0;
   }
-  
+
   .contact_input {
     width: 100%;
+  }
+}
+
+/* Search Bar */
+.searchBar {
+  width: 80%;
+}
+
+.searchBar input {
+  height: 2.5rem;
+  width: 100%;
+  padding-left: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  .searchBar {
+    width: 100%;
+  }
+}
+
+/* Search Layout */
+.searchBar{
+  width:80%;
+}
+.searchBar input {
+  height: 2.5rem;
+  width: 100%;
+  padding-left: 1rem;
+}
+
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
+.searchLayout {
+  display: flex;
+  justify-content: end;
+  gap: 1rem;
+  align-items: center;
+  width: 60%;
+}
+
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #f496ac 94%, #0000) top/8px 8px
+      no-repeat,
+    conic-gradient(#0000 30%, #f496ac);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+  animation: l13 1s infinite linear;
+}
+@keyframes l13 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+@media (max-width: 800px) {
+  .searchLayout {
+    width: 100%;
+    justify-content: space-between;
   }
 }

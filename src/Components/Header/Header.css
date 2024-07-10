@@ -26,6 +26,7 @@
   border-radius: 3px;
   border: 0;
   color: white;
+  cursor:pointer;
   font-weight: bold;
   text-align: center;
   font-size: larger;
@@ -80,6 +81,7 @@
     width: 4rem;
     height: 4rem;
     margin-right: 2rem;
+    cursor : "pointer"
   }
 
   .toggle > div,

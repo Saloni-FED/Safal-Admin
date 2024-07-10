@@ -1,0 +1,15 @@
+.searchBar {
+  width: 80%;
+}
+
+.searchBar input {
+  height: 2.5rem;
+  width: 100%;
+  padding-left: 1rem;
+}
+
+@media screen and (max-width: 800px) {
+  .searchBar {
+    width: 100%;
+  }
+}

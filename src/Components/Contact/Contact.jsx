@@ -3,11 +3,9 @@ import React, { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase/firebaseConfig.js";
 import "./Contact.css";
-import load from "../../../src/assests/load.png"
+import load from "../../../src/assests/load.png";
 import { Button, Select, MenuItem } from "@mui/material";
-import Image from "next/image.js";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import Loader from "../Loader/Loader.jsx";
 
 const Contact = () => {
   const [contacts, setContacts] = useState([]);
@@ -59,17 +57,21 @@ const Contact = () => {
   return (
     <div>
       <div className="showPartnersPage">
+        <div className="showPartnersHeader">
           <div className="search">
             <h1 className="head">Contact Us</h1>
-            <input
-              placeholder="Search"
-              className="contact_input"
-              value={searchInput}
-              onChange={handleSearchInputChange}
-            />
-        </div>
-        <div style={{display:"flex", justifyContent:"flex-end", paddingRight : "5px", marginBottom:"1rem"}}>
-          <Image src={load} width={50} height={50} style={{height : "40px", width : "40px"}} alt={load} onClick={fetchPartners}/>
+            <div className="searchLayout">
+              <div className=".searchBar">
+                <input
+                  placeholder="Search.."
+                  value={searchInput} // Bind input value to searchQuery state
+                  onChange={(e) => setSearchInput(e.target.value)} // Update searchQuery state on input change
+                />
+              </div>
+
+              <Loader func={fetchPartners} />
+            </div>
+          </div>
         </div>
         <div className="showPartners">
           <table className="data-table">
@@ -96,31 +98,33 @@ const Contact = () => {
           </table>
           <div className="pagination">
             <Button
-             sx={{width:"6rem"}}
+              sx={{ width: "6rem" }}
               onClick={() => handleChangePage(page - 1)}
               disabled={page === 0}
             >
               Previous
             </Button>
             <Button
-             sx={{width:"6rem"}}
+              sx={{ width: "6rem" }}
               onClick={() => handleChangePage(page + 1)}
-              disabled={page >= Math.ceil(filteredPartners.length / rowsPerPage) - 1}
+              disabled={
+                page >= Math.ceil(filteredPartners.length / rowsPerPage) - 1
+              }
             >
               Next
             </Button>
             <select
-            value={rowsPerPage}
-            onChange={handleChangeRowsPerPage}
-            style={{ marginLeft: "1rem", width: "6rem" }}
-            sx={{ width: "10rem" }}
-          >
-            {[10, 25, 50, 100].map((size) => (
-              <option key={size} value={size} sx={{width:"10rem"}}>
-                {size}
-              </option>
-            ))}
-          </select>
+              value={rowsPerPage}
+              onChange={handleChangeRowsPerPage}
+              style={{ marginLeft: "1rem", width: "6rem" }}
+              sx={{ width: "10rem" }}
+            >
+              {[10, 25, 50, 100].map((size) => (
+                <option key={size} value={size} sx={{ width: "10rem" }}>
+                  {size}
+                </option>
+              ))}
+            </select>
           </div>
         </div>
       </div>

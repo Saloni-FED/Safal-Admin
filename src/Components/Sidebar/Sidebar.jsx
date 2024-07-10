@@ -6,26 +6,30 @@ import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import contact from "../../assests/admin_mob.webp";
 import subroker from "../../assests/admin_subbroker.webp"
 import img from "../../assests/img.webp"
+import { useRouter } from "next/navigation";
 
 import Link from "next/link";
 import Image from "next/image";
 
 const Sidebar = ({ toggle }) => {
-  const [clicked, setClicked] = useState("contacts");
+  const router = useRouter()
+  const [clicked, setClicked] = useState("entry");
 
   const { sidebar, isOpen, removeSidebar } = useContext(AppContext);
   const handleClick = (id) => {
+    console.log(id)
     setClicked(id); // Set the clicked state to the id of the clicked link
+    router.push(`/${id}`)
   };
 
   return (
     <div className={isOpen ? "sidebar side" : "sidebar sideblur"}>
       <div>
-        <h2>Admin Panels</h2>
+        <h2>Admin Layout</h2>
 
         <div
-          onClick={() => handleClick("contacts")}
-          className={clicked === "contacts" ? "sideClicked" : ""}
+          onClick={() => handleClick("entry")}
+          className={clicked === "entry" ? "sideClicked" : ""}
         >
           <Image src={contact} alt="Partners" />
           <Link href="/entry">Contacts</Link>

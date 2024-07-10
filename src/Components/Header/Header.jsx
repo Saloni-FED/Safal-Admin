@@ -47,13 +47,13 @@ const Header = () => {
       <a href="/">
         <h1>Safal Admin Panel</h1>
       </a>
-      <button className="logout" onClick={handleLogout} >
+      <button className="logout" onClick={handleLogout} style={{cursor:"ponter"}}>
         {/* <div> */}
           <Image src={logout} alt="logout" className="img" style={{width:"40px", height:"40px"}}/>
         {/* </div> */}
         <p>Log Out</p>
       </button>
-      <button onClick={removeSidebar} className={isOpen ? "toggle" : "cross"} >
+      <button onClick={removeSidebar} className={isOpen ? "toggle" : "cross"} style={{cursor:"pointer"}}>
         <div></div>
         <div></div>
         <div></div>

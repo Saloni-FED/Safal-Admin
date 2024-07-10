@@ -369,7 +369,7 @@ const UnlistedShares = () => {
                 <tr key={makeup.id}>
                   <td>{makeup.name}</td>
                   <td>
-                    <img src={makeup.imageUrl} style={{ width: "50px" }} />
+                    <img src={makeup.imageUrl} style={{ width: "50px" }} className="img_hover"/>
                   </td>
                   <td>{makeup.price}</td>
                   {new Date(makeup.createdAt.toDate()).toLocaleString() && (

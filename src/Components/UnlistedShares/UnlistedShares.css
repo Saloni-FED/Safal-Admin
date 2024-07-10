@@ -205,3 +205,11 @@
 
   
 }
+
+.img_hover{
+  transition: all 0.3s ease-in-out;
+}
+
+.img_hover:hover {
+  scale: 600%
+}
