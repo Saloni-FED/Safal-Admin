@@ -15,6 +15,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import Loader from "../Loader/Loader";
 import { db, storage } from "../../firebase/firebaseConfig";
 // import "react-toastify/dist/ReactToastify.css";
 import AddPhotoAlternateOutlinedIcon from "@mui/icons-material/AddPhotoAlternateOutlined";
@@ -43,6 +44,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import addIcon from "../../assests/addIcon.png";
 import "./UnlistedShares.css";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const UnlistedShares = () => {
   const [page, setPage] = useState(0);
@@ -69,11 +71,12 @@ const UnlistedShares = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchMakeupsCategories = async () => {
     try {
       const makeupsRef = query(
-        collection(db, "adminSubBroker"),
+        collection(db, "unlistedShares"),
         orderBy("createdAt", "desc")
       );
       const makeupSnapshot = await getDocs(makeupsRef);
@@ -81,6 +84,7 @@ const UnlistedShares = () => {
         id: doc.id,
         ...doc.data(),
       }));
+      setIsLoading(false);
       setUnlistedShares(makeupsData);
       //   setMakeupsCategories(makeupsData);
       console.log(makeupsData);
@@ -135,7 +139,7 @@ const UnlistedShares = () => {
         });
       }
 
-      const docRef = await setDoc(doc(db, "adminSubBroker", mid), {
+      const docRef = await setDoc(doc(db, "unlistedShares", mid), {
         name: name,
         price: price,
 
@@ -295,61 +299,51 @@ const UnlistedShares = () => {
 
   // console.log(makeupsCategories)
   // console.log(show);
+
+  if (isLoading)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        // height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
   return (
     <div className="makeupsPage">
       <div className="makeupsHeader">
         <div className="search">
           <h1 className="head">Unlisted Shares</h1>
-          <input
-            placeholder="Search.."
-            className="contact_input"
-            value={searchQuery} // Bind input value to searchQuery state
-            onChange={(e) => setSearchQuery(e.target.value)} // Update searchQuery state on input change
-          />
+
+          <div className="searchLayout">
+            <div className="searchBar">
+              <input
+                placeholder="search"
+                value={searchQuery} // Bind input value to searchQuery state
+                onChange={(e) => setSearchQuery(e.target.value)}
+                setSearchQuery={setSearchQuery}
+              />
+            </div>
+
+            <Button
+              sx={{
+                width: "10rem",
+              }}
+              id="newBtn"
+              variant="outlined"
+              onClick={() => {
+                setMakeupDialogOpen(true);
+              }}
+            >
+              Add Shares
+            </Button>
+            <Loader func={fetchMakeupsCategories} />
+          </div>
         </div>
 
-        <div
-          className=""
-          style={{
-            width: "100%",
-            display: "flex",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            paddingRight: "3rem",
-            marginBottom: "2rem",
-          }}
-        >
-          <Button
-            sx={{
-              width: "10rem",
-              marginBottom: "0.5rem",
-            }}
-            id="newBtn"
-            variant="outlined"
-            onClick={() => {
-              setMakeupDialogOpen(true);
-            }}
-          >
-            Add Shares
-          </Button>
-          <Image
-            src={load}
-            width={20}
-            height={20}
-            style={{ height: "40px", width: "40px" }}
-            alt={load}
-          />
-          {/* <div style={{ display: "flex", justifyContent: "end" }}> */}
-          {/* <Image
-              height={40}
-              width={40}
-              style={{ cursor: "pointer", marginTop: "", marginLeft: "5px" }}
-              onClick={fetchMakeups}
-              src={load}
-              alt="load"
-            /> */}
-          {/* </div> */}
-        </div>
+        {/* <div className="buttonLayoutScroll"></div> */}
       </div>
       <div className="makeups">
         <table className="data-table">
@@ -369,7 +363,11 @@ const UnlistedShares = () => {
                 <tr key={makeup.id}>
                   <td>{makeup.name}</td>
                   <td>
-                    <img src={makeup.imageUrl} style={{ width: "50px" }} className="img_hover"/>
+                    <img
+                      src={makeup.imageUrl}
+                      style={{ width: "50px" }}
+                      className="img_hover"
+                    />
                   </td>
                   <td>{makeup.price}</td>
                   {new Date(makeup.createdAt.toDate()).toLocaleString() && (

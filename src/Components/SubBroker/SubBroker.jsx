@@ -7,6 +7,8 @@ import { Button, Select, MenuItem } from "@mui/material";
 import Image from "next/image.js";
 import "./SubBroker.css";
 import Loader from "../Loader/Loader.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const SubBroker = () => {
   const [contacts, setContacts] = useState([]);
@@ -14,6 +16,8 @@ const SubBroker = () => {
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10); // Default rows per page
+
+  const [loader, setIsLoader] = useState(true);
 
   const fetchPartners = async () => {
     try {
@@ -23,6 +27,7 @@ const SubBroker = () => {
         id: doc.id,
         ...doc.data(),
       }));
+      setIsLoader(false);
       setContacts(contactsList);
       setFilteredPartners(contactsList);
     } catch (error) {
@@ -55,6 +60,17 @@ const SubBroker = () => {
     setSearchInput(event.target.value);
   };
 
+  if (loader)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        // height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
   return (
     <div>
       <div className="showPartnersPage">

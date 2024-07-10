@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Toaster } from "react-hot-toast";
 import Header from "@/Components/Header/Header";
 import Sidebar from "@/Components/Sidebar/Sidebar";
+import ProtectedRoute from "@/Components/Protected/ProtectedRoute";
 
 const Layout = ({ children }) => {
   const [toggle, setToggle] = useState(false);
@@ -12,7 +13,8 @@ const Layout = ({ children }) => {
   };
 
   return (
-    <div className="app">
+    <ProtectedRoute>
+       <div className="app">
       <Header handleToggle={handleToggle} />
       <div className="hero">
         <Sidebar toggle={toggle} />
@@ -20,6 +22,8 @@ const Layout = ({ children }) => {
       </div>
       <Toaster />
     </div>
+    </ProtectedRoute>
+   
   );
 };
 

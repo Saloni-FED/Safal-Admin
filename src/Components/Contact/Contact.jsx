@@ -6,6 +6,8 @@ import "./Contact.css";
 import load from "../../../src/assests/load.png";
 import { Button, Select, MenuItem } from "@mui/material";
 import Loader from "../Loader/Loader.jsx";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const Contact = () => {
   const [contacts, setContacts] = useState([]);
@@ -13,6 +15,8 @@ const Contact = () => {
   const [searchInput, setSearchInput] = useState("");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10); // Default rows per page
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const fetchPartners = async () => {
     try {
@@ -22,6 +26,7 @@ const Contact = () => {
         id: doc.id,
         ...doc.data(),
       }));
+      setIsLoading(false);
       setContacts(contactsList);
       setFilteredPartners(contactsList);
     } catch (error) {
@@ -53,6 +58,18 @@ const Contact = () => {
   const handleSearchInputChange = (event) => {
     setSearchInput(event.target.value);
   };
+
+  if (isLoading)
+    return (
+      <Box
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        // height="100vh"
+      >
+        <CircularProgress />
+      </Box>
+    );
 
   return (
     <div>
