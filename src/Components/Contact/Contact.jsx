@@ -61,7 +61,7 @@ const Contact = () => {
           <div className="search">
             <h1 className="head">Contact Us</h1>
             <div className="searchLayout">
-              <div className=".searchBar">
+              <div className="searchBar">
                 <input
                   placeholder="Search.."
                   value={searchInput} // Bind input value to searchQuery state
