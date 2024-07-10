@@ -10,11 +10,12 @@ const Layout = ({ children }) => {
   const handleToggle = () => {
     setToggle((prev) => !prev);
   };
+
   return (
     <div className="app">
       <Header handleToggle={handleToggle} />
       <div className="hero">
-        <Sidebar toggle={toggle}/>
+        <Sidebar toggle={toggle} />
         <div className="content">{children}</div>
       </div>
       <Toaster />

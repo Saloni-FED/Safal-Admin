@@ -1,11 +1,11 @@
 .sidebar {
   width: 16rem;
-  height: 85vh;
+  height: 90vh;
   background-color: rgb(84, 102, 249, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* overflow-y: scroll; */
+  overflow-y: auto;
   overflow-x: hidden;
   margin: 0.5rem;
   margin-bottom: 0;

@@ -5,8 +5,28 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  width: 100%;
-  /* overflow:hidden; */
+  scroll-behavior: smooth;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: transparent; /* Color of the scrollbar thumb */
+  border: 1px solid var(--mainColor);
+  border-radius: 4px; /* Rounded corners for the scrollbar thumb */
+  width: 4px;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  border-color: var(--mainColor);
+  background-color: rgba(84, 102, 249, 0.3); /* Color of the scrollbar thumb on hover */
+}
+
+*::-webkit-scrollbar-track {
+  background-color: rgba(84, 102, 249, 0.3); /* Background color of the scrollbar track */
 }
 
 :root {
@@ -52,6 +72,7 @@ a {
   text-decoration: none;
   outline: 0 !important;
 }
+
 a:hover {
   color: var(--mainColor);
   text-decoration: none;
@@ -74,18 +95,36 @@ p {
   display: flex;
   flex-direction: column;
   height: 100vh; /* Ensure full viewport height */
+  overflow: hidden; /* Prevent scrolling on the body */
 }
 
 .hero {
   display: flex;
   flex: 1; /* Fill remaining vertical space */
+  overflow: hidden; /* Prevent scrolling on the hero */
+}
+
+.sidebar {
+  width: 16rem;
+  height: 100vh; /* Full viewport height for sidebar */
+  background-color: rgba(84, 102, 249, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: auto; /* Allow scrolling within the sidebar */
+  overflow-x: hidden;
+  padding: 0.5rem 0;
+  transition: all 500ms ease-in-out;
+  position: sticky;
+  top: 0; /* Stick to the top */
 }
 
 .content {
   flex: 1; /* Take up remaining space beside Sidebar */
   padding: 5rem 2rem;
   margin-left: 1.5rem;
-  height: fit-content;
+  height: 100%;
+  overflow-y: auto; /* Make content area scrollable */
 }
 
 .search {
@@ -95,34 +134,35 @@ p {
   justify-content: space-between;
   align-items: center;
   padding-left: 1px;
-  /* padding-right: 20px; */
 }
+
 .head {
   font-size: 33px;
   font-weight: bolder;
   text-transform: uppercase;
   margin-left: 3px;
 }
+
 .contact_input {
   padding: 0.6rem;
-  width: 80%;
+  width: 50%;
   border-radius: 1px;
   font-size: 16px;
   height: 2.5rem;
-  color: black; /* Light text color */
-  border: 1px solid #ddd; /* Light border color */
+  color: black;
+  border: 1px solid #ddd;
 }
 
 @media (max-width: 748px) {
   .search {
     flex-direction: column;
     gap: 2rem;
-    
     padding: 0;
     margin-bottom: 0;
     margin-top: 0;
   }
-  .contact_input{
-   width:100%;
+  
+  .contact_input {
+    width: 100%;
   }
 }

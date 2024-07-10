@@ -22,6 +22,7 @@
   width: 10rem; /* New width */
   display: flex; /* New display */
   align-items: center; /* New align-items */
+  gap:10px;
   border-radius: 3px;
   border: 0;
   color: white;
@@ -34,7 +35,7 @@
 .logout p {
   color: white;
   font-size: 20px;
-  padding-top: 10px;
+  padding-top: 10px
 }
 
 /* .hidden_log {
