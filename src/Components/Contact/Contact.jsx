@@ -76,7 +76,7 @@ const Contact = () => {
       <div className="showPartnersPage">
         <div className="showPartnersHeader">
           <div className="search">
-            <h1 className="head">Conatct Us </h1>
+            <h1 className="head">Contact Us </h1>
             <div className="searchLayout">
               <div className="searchBar">
                 <input
