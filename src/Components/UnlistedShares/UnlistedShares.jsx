@@ -11,6 +11,9 @@ import {
   DialogTitle,
   Input,
   MenuItem,
+  FormControl,
+  InputLabel,
+  Select,
   Paper,
   TextField,
   Typography,
@@ -65,13 +68,15 @@ const UnlistedShares = () => {
 
   //   Unlisted Shares
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [changePrice, setChangePrice] = useState("");
+  const [changePercentage, setChangePercentage] = useState("");
   const [unlistedShares, setUnlistedShares] = useState([]);
 
   const [searchQuery, setSearchQuery] = useState("");
 
   // Filter
   const [isLoading, setIsLoading] = useState(true);
+  const [operation, setOperation] = useState("");
 
   const fetchMakeupsCategories = async () => {
     try {
@@ -119,10 +124,19 @@ const UnlistedShares = () => {
   };
 
   const handleAddMakeup = async () => {
-    if (name.trim() === "" || price.trim() === "") return;
+    if (
+      name.trim() === "" ||
+      changePrice.trim() === "" ||
+      changePercentage.trim() === "" || image ) {
+      return;
+    }
+   
+    if(parseInt(changePercentage) > 100){
+      return;
+    }
     const mid = `MID${Date.now()}`;
     setMakeupDialogOpen(false);
-
+  
     try {
       let imageURL = "";
       if (image) {
@@ -130,7 +144,7 @@ const UnlistedShares = () => {
       } else {
         imageURL = imagePreview;
       }
-
+  
       if (image) {
         const archiveURL = await handleImageUploadToArchive(image);
         const archiveRef = collection(db, "archive");
@@ -138,36 +152,35 @@ const UnlistedShares = () => {
           ImageUrl: archiveURL,
         });
       }
-
+     
       const docRef = await setDoc(doc(db, "unlistedShares", mid), {
         name: name,
-        price: price,
-
+        changePrice: changePrice,
+        changePercentage: changePercentage,
+        operation: operation,
         createdAt: serverTimestamp(),
         imageUrl: imageURL,
       });
-
-      // fetchMakeups();
-      // setDivId("button-0");
-      // console.log(makeups);
-      // toast.success("Makeup added Successfully");
-
+  
       fetchMakeupsCategories();
       setDivId("button-0");
-
-      // console.log(makeupsData);
-      if (unlistedShares) {
-        toast.success("Shares added Successfully");
-      }
+      console.log("success");
+  
+      toast.success("Shares added Successfully");
+  
       setName("");
-      setPrice("");
+      setChangePrice("");
+      setChangePercentage("");
+      setOperation("");
       setImage(null);
       setImagePreview("");
     } catch (error) {
-      toast.error("Error adding Makeup ");
+      toast.error("Error adding Makeup");
       console.error("Error adding makeup:", error);
     }
   };
+  
+
   // console.log(makeups)
 
   //   const handleEditMakeup = async () => {
@@ -351,7 +364,7 @@ const UnlistedShares = () => {
             <tr>
               <th>Name</th>
               <th>Image</th>
-              <th>Price</th>
+              <th>Change Price</th>
               <th>Created at</th>
               {/* <th>Actions</th> */}
             </tr>
@@ -369,7 +382,8 @@ const UnlistedShares = () => {
                       className="img_hover"
                     />
                   </td>
-                  <td>{makeup.price}</td>
+                  <td>{makeup.changePrice}</td>
+                  {/* <td>{makeup.ChangePer}</td> */}
                   {new Date(makeup.createdAt.toDate()).toLocaleString() && (
                     <td>
                       {new Date(makeup.createdAt.toDate()).toLocaleString()}
@@ -439,21 +453,56 @@ const UnlistedShares = () => {
         <DialogContent>
           <TextField
             fullWidth
-            variant="filled"
+            // variant="filled"
             label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             sx={{ mt: 2 }}
           />
-
+          <FormControl fullWidth sx={{ mt: 2 }}>
+            <InputLabel id="plus-minus-select-label">Operation</InputLabel>
+            <Select
+              labelId="plus-minus-select-label"
+              id="plus-minus-select"
+              value={operation}
+              onChange={(e) => setOperation(e.target.value)}
+              label="Operation"
+            >
+              <MenuItem value="+">+</MenuItem>
+              <MenuItem value="-">-</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
-            variant="filled"
+            // variant="filled"
             sx={{ mt: 2 }}
-            label="Price"
+            label="Change  Price "
             type="number"
             fullWidth
-            value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            value={changePrice}
+            onChange={(e) => setChangePrice(e.target.value)}
+            inputProps={{
+              min: 0,
+              max: 100,
+              onKeyDown: (event) => {
+                if (
+                  event.key === "-" ||
+                  event.key === "+" ||
+                  event.key === "e" ||
+                  event.key === "E"
+                ) {
+                  event.preventDefault();
+                }
+              },
+            }}
+          />
+          <TextField
+            // variant="filled"
+            sx={{ mt: 2 }}
+            label="Change Percentage It should be less than 100"
+            type="number"
+            fullWidth
+            value={changePercentage}
+            onChange={(e) => setChangePercentage(e.target.value)}
             inputProps={{
               min: 0,
               max: 100,
