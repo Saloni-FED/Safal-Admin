@@ -25,7 +25,7 @@ const Sidebar = ({ toggle }) => {
   return (
     <div className={isOpen ? "sidebar side" : "sidebar sideblur"}>
       <div>
-        <h2>Admin Layout</h2>
+        {/* <h2>Admin Layout</h2> */}
 
         <div
           onClick={() => handleClick("entry")}

@@ -19,6 +19,8 @@ export default function Login() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(true);
 
+  const [loginLoader, setLoginLoader] = useState(false)
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -32,13 +34,16 @@ export default function Login() {
   }, [router]);
 
   const handleLogin = async (e) => {
+    setLoginLoader(true)
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      setLoginLoader(false)
       toast.success("Signed in successfully");
       router.push("/entry");
     } catch (error) {
       console.log(error.code)
+      setLoginLoader(false)
       if (error.code) {
         switch (error.code) {
           case "auth/invalid-email":
@@ -116,7 +121,7 @@ export default function Login() {
         />
         {error && <p className="error">{error}</p>}
         <button type="submit" className="button">
-          Login
+          { loginLoader ? <CircularProgress/> : "Login"}
         </button>
       </form>
     </div>
