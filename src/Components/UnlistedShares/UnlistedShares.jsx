@@ -214,6 +214,7 @@ const UnlistedShares = () => {
         setImageError("Add Image");
         return;
       } else {
+        setImageError("");
         setMakeupDialogOpen(false);
 
         console.log(imageURL, "success image");
@@ -605,9 +606,12 @@ const UnlistedShares = () => {
             )}
           </span>
           {imageError && (
-            <p style={{ color: "red", margin: "0", marginTop: "8px" }}>
-              {imageError}
-            </p>
+            <div>
+              <p>Dimesions Of image should be of 1797 x 918</p>
+              <p style={{ color: "red", margin: "0", marginTop: "8px" }}>
+                {imageError}
+              </p>
+            </div>
           )}
         </DialogContent>
         <DialogActions>
