@@ -78,6 +78,59 @@ const UnlistedShares = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [operation, setOperation] = useState("");
 
+  const [nameError, setNameError] = useState("");
+  const [operationError, setOperationError] = useState("");
+  const [changePriceError, setChangePriceError] = useState("");
+  const [changePercentageError, setChangePercentageError] = useState("");
+  const [imageError, setImageError] = useState("");
+
+  const validateForm = () => {
+    let valid = true;
+
+    if (!name) {
+      setNameError("Name is required");
+      valid = false;
+    } else {
+      setNameError("");
+    }
+
+    if (!operation) {
+      setOperationError("Operation is required");
+      valid = false;
+    } else {
+      setOperationError("");
+    }
+
+    if (!changePrice) {
+      setChangePriceError("Change Price is required");
+      valid = false;
+    } else if (changePrice < 0 || changePrice > 100) {
+      setChangePriceError("Change Price must be between 0 and 100");
+      valid = false;
+    } else {
+      setChangePriceError("");
+    }
+
+    if (!changePercentage) {
+      setChangePercentageError("Change Percentage is required");
+      valid = false;
+    } else if (changePercentage < 0 || changePercentage > 100) {
+      setChangePercentageError("Change Percentage must be between 0 and 100");
+      valid = false;
+    } else {
+      setChangePercentageError("");
+    }
+
+    // if (!image) {
+    //   setImageError("Image is required");
+    //   valid = false;
+    // } else {
+    //   setImageError("");
+    // }
+    console.log(valid);
+    return valid;
+  };
+
   const fetchMakeupsCategories = async () => {
     try {
       const makeupsRef = query(
@@ -124,19 +177,20 @@ const UnlistedShares = () => {
   };
 
   const handleAddMakeup = async () => {
+    console.log(image);
     if (
       name.trim() === "" ||
       changePrice.trim() === "" ||
-      changePercentage.trim() === "" || image ) {
+      changePercentage.trim() === ""
+    ) {
       return;
     }
-   
-    if(parseInt(changePercentage) > 100){
+
+    if (parseInt(changePercentage) > 100) {
       return;
     }
     const mid = `MID${Date.now()}`;
-    setMakeupDialogOpen(false);
-  
+
     try {
       let imageURL = "";
       if (image) {
@@ -144,7 +198,7 @@ const UnlistedShares = () => {
       } else {
         imageURL = imagePreview;
       }
-  
+
       if (image) {
         const archiveURL = await handleImageUploadToArchive(image);
         const archiveRef = collection(db, "archive");
@@ -152,34 +206,45 @@ const UnlistedShares = () => {
           ImageUrl: archiveURL,
         });
       }
-     
-      const docRef = await setDoc(doc(db, "unlistedShares", mid), {
-        name: name,
-        changePrice: changePrice,
-        changePercentage: changePercentage,
-        operation: operation,
-        createdAt: serverTimestamp(),
-        imageUrl: imageURL,
-      });
-  
-      fetchMakeupsCategories();
-      setDivId("button-0");
-      console.log("success");
-  
-      toast.success("Shares added Successfully");
-  
-      setName("");
-      setChangePrice("");
-      setChangePercentage("");
-      setOperation("");
-      setImage(null);
-      setImagePreview("");
+
+      console.log(image, "image is here");
+      console.log(imageURL, "before image");
+
+      if (!imageURL) {
+        setImageError("Add Image");
+        return;
+      } else {
+        setMakeupDialogOpen(false);
+
+        console.log(imageURL, "success image");
+
+        const docRef = await setDoc(doc(db, "unlistedShares", mid), {
+          name: name,
+          changePrice: changePrice,
+          changePercentage: changePercentage,
+          operation: operation,
+          createdAt: serverTimestamp(),
+          imageUrl: imageURL,
+        });
+
+        fetchMakeupsCategories();
+        setDivId("button-0");
+        console.log("success");
+
+        toast.success("Shares added Successfully");
+
+        setName("");
+        setChangePrice("");
+        setChangePercentage("");
+        setOperation("");
+        setImage(null);
+        setImagePreview("");
+      }
     } catch (error) {
       toast.error("Error adding Makeup");
       console.error("Error adding makeup:", error);
     }
   };
-  
 
   // console.log(makeups)
 
@@ -324,6 +389,16 @@ const UnlistedShares = () => {
         <CircularProgress />
       </Box>
     );
+
+  const handleEditMakeup = () => {
+    console.log(edit);
+  };
+  const handleSubmit = () => {
+    if (validateForm()) {
+      console.log("validated");
+      handleAddMakeup();
+    }
+  };
   return (
     <div className="makeupsPage">
       <div className="makeupsHeader">
@@ -453,11 +528,11 @@ const UnlistedShares = () => {
         <DialogContent>
           <TextField
             fullWidth
-            // variant="filled"
             label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
             sx={{ mt: 2 }}
+            helperText={nameError}
           />
           <FormControl fullWidth sx={{ mt: 2 }}>
             <InputLabel id="plus-minus-select-label">Operation</InputLabel>
@@ -471,11 +546,11 @@ const UnlistedShares = () => {
               <MenuItem value="+">+</MenuItem>
               <MenuItem value="-">-</MenuItem>
             </Select>
+            {operationError && <p style={{ margin: "0" }}>{operationError}</p>}
           </FormControl>
           <TextField
-            // variant="filled"
             sx={{ mt: 2 }}
-            label="Change  Price "
+            label="Change Price"
             type="number"
             fullWidth
             value={changePrice}
@@ -494,11 +569,11 @@ const UnlistedShares = () => {
                 }
               },
             }}
+            helperText={changePriceError}
           />
           <TextField
-            // variant="filled"
             sx={{ mt: 2 }}
-            label="Change Percentage It should be less than 100"
+            label="Change Percentage (should be less than 100)"
             type="number"
             fullWidth
             value={changePercentage}
@@ -517,8 +592,8 @@ const UnlistedShares = () => {
                 }
               },
             }}
+            helperText={changePercentageError}
           />
-
           <span className="uploadImg1" onClick={() => setOpenImageDialog(true)}>
             {imagePreview ? (
               <img height={150} src={imagePreview} alt="a" />
@@ -529,13 +604,17 @@ const UnlistedShares = () => {
               </>
             )}
           </span>
+          {imageError && (
+            <p style={{ color: "red", margin: "0", marginTop: "8px" }}>
+              {imageError}
+            </p>
+          )}
         </DialogContent>
         <DialogActions>
           <Button
             sx={{
               width: "fit-content",
               backgroundColor: "rgb(84, 102, 249)",
-
               borderColor: "rgb(84, 102, 249, 0.3)",
               color: "white",
               "&:hover": {
@@ -558,7 +637,6 @@ const UnlistedShares = () => {
             sx={{
               width: "fit-content",
               backgroundColor: "rgb(84, 102, 249)",
-
               borderColor: "rgb(84, 102, 249, 0.3)",
               color: "white",
               "&:hover": {
@@ -568,7 +646,7 @@ const UnlistedShares = () => {
                     : "rgb(84, 102, 249, 0.9)",
               },
             }}
-            onClick={isEdit ? handleEditMakeup : handleAddMakeup}
+            onClick={handleSubmit}
             color="secondary"
           >
             {isEdit ? "Edit" : "Add"}
