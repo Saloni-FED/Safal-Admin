@@ -50,6 +50,13 @@ const Sidebar = ({ toggle }) => {
           <Image src={img} alt="Partners" />
           <Link href="/subbroker">Sub Broker</Link>
         </div>
+        <div
+          onClick={() => handleClick("unlistedsharesquestions")}
+          className={clicked === "unlistedsharesquestions" ? "sideClicked" : ""}
+        >
+          <Image src={img} alt="Partners" />
+          <Link href="/unlistedsharesquestions">Unlisted Shares Contact</Link>
+        </div>
 
        
       </div>
