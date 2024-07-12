@@ -207,8 +207,8 @@ const UnlistedShares = () => {
         });
       }
 
-      console.log(image, "image is here");
-      console.log(imageURL, "before image");
+      // console.log(image, "image is here");
+      // console.log(imageURL, "before image");
 
       if (!imageURL) {
         setImageError("Add Image");
