@@ -306,10 +306,12 @@ const UnlistedShares = () => {
 
   const handleDeleteMakeup = async (id) => {
     try {
-      const ref = doc(db, "makeups", id);
+      const ref = doc(db, "unlistedShares", id);
       await deleteDoc(ref);
+      fetchMakeupsCategories()
       setMakeupDialogOpen(false);
-      toast.success("Makeup Deleted Successfully");
+
+      toast.success("Unlisted Shares Deleted Successfully");
     } catch (error) {
       toast.error("Error Deleting Makeup");
       console.error("Error deleting category:", error);
@@ -442,7 +444,7 @@ const UnlistedShares = () => {
               <th>Image</th>
               <th>Change Price</th>
               <th>Created at</th>
-              {/* <th>Actions</th> */}
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -465,21 +467,7 @@ const UnlistedShares = () => {
                       {new Date(makeup.createdAt.toDate()).toLocaleString()}
                     </td>
                   )}
-                  {/* <td data-label="Select">
-                    <Button
-                      onClick={() => {
-                        setMakeupDialogOpen(true);
-                        setIsEdit(true);
-                        setEditId(makeup.id);
-                        setNewCategory(makeup.category);
-                        setNewMakeup(makeup.name);
-                        setDuration(makeup.duration);
-                        setImagePreview(makeup.imageUrl);
-                        
-                      }}
-                    >
-                      Edit
-                    </Button>
+                  <td data-label="Select">
                     <Button
                       onClick={() => {
                         handleDeleteMakeup(makeup.id);
@@ -487,7 +475,7 @@ const UnlistedShares = () => {
                     >
                       Delete
                     </Button>
-                  </td> */}
+                  </td>
                 </tr>
               ))}
           </tbody>
