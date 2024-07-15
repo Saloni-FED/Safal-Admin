@@ -101,25 +101,25 @@ const UnlistedShares = () => {
       setOperationError("");
     }
 
-    if (!changePrice) {
-      setChangePriceError("Change Price is required");
-      valid = false;
-    } else if (changePrice < 0 || changePrice > 100) {
-      setChangePriceError("Change Price must be between 0 and 100");
-      valid = false;
-    } else {
-      setChangePriceError("");
-    }
+    // if (!changePrice) {
+    //   setChangePriceError("Change Price is required");
+    //   valid = false;
+    // } else if (changePrice < 0 || changePrice > 100) {
+    //   setChangePriceError("Change Price must be between 0 and 100");
+    //   valid = false;
+    // } else {
+    //   setChangePriceError("");
+    // }
 
-    if (!changePercentage) {
-      setChangePercentageError("Change Percentage is required");
-      valid = false;
-    } else if (changePercentage < 0 || changePercentage > 100) {
-      setChangePercentageError("Change Percentage must be between 0 and 100");
-      valid = false;
-    } else {
-      setChangePercentageError("");
-    }
+    // if (!changePercentage) {
+    //   setChangePercentageError("Change Percentage is required");
+    //   valid = false;
+    // } else if (changePercentage < 0 || changePercentage > 100) {
+    //   setChangePercentageError("Change Percentage must be between 0 and 100");
+    //   valid = false;
+    // } else {
+    //   setChangePercentageError("");
+    // }
 
     // if (!image) {
     //   setImageError("Image is required");
@@ -178,11 +178,7 @@ const UnlistedShares = () => {
 
   const handleAddMakeup = async () => {
     console.log(image);
-    if (
-      name.trim() === "" ||
-      changePrice.trim() === "" ||
-      changePercentage.trim() === ""
-    ) {
+    if (name.trim() === "") {
       return;
     }
 
@@ -442,7 +438,7 @@ const UnlistedShares = () => {
             <tr>
               <th>Name</th>
               <th>Image</th>
-              <th>Change Price</th>
+              {/* <th>Change Price</th> */}
               <th>Created at</th>
               <th>Actions</th>
             </tr>
@@ -460,7 +456,7 @@ const UnlistedShares = () => {
                       className="img_hover"
                     />
                   </td>
-                  <td>{makeup.changePrice}</td>
+                  {/* <td>{makeup.changePrice}</td> */}
                   {/* <td>{makeup.ChangePer}</td> */}
                   {new Date(makeup.createdAt.toDate()).toLocaleString() && (
                     <td>
