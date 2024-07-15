@@ -308,7 +308,7 @@ const UnlistedShares = () => {
     try {
       const ref = doc(db, "unlistedShares", id);
       await deleteDoc(ref);
-      fetchMakeupsCategories()
+      fetchMakeupsCategories();
       setMakeupDialogOpen(false);
 
       toast.success("Unlisted Shares Deleted Successfully");
@@ -537,52 +537,7 @@ const UnlistedShares = () => {
             </Select>
             {operationError && <p style={{ margin: "0" }}>{operationError}</p>}
           </FormControl>
-          <TextField
-            sx={{ mt: 2 }}
-            label="Change Price"
-            type="number"
-            fullWidth
-            value={changePrice}
-            onChange={(e) => setChangePrice(e.target.value)}
-            inputProps={{
-              min: 0,
-              max: 100,
-              onKeyDown: (event) => {
-                if (
-                  event.key === "-" ||
-                  event.key === "+" ||
-                  event.key === "e" ||
-                  event.key === "E"
-                ) {
-                  event.preventDefault();
-                }
-              },
-            }}
-            helperText={changePriceError}
-          />
-          <TextField
-            sx={{ mt: 2 }}
-            label="Change Percentage (should be less than 100)"
-            type="number"
-            fullWidth
-            value={changePercentage}
-            onChange={(e) => setChangePercentage(e.target.value)}
-            inputProps={{
-              min: 0,
-              max: 100,
-              onKeyDown: (event) => {
-                if (
-                  event.key === "-" ||
-                  event.key === "+" ||
-                  event.key === "e" ||
-                  event.key === "E"
-                ) {
-                  event.preventDefault();
-                }
-              },
-            }}
-            helperText={changePercentageError}
-          />
+
           <span className="uploadImg1" onClick={() => setOpenImageDialog(true)}>
             {imagePreview ? (
               <img height={150} src={imagePreview} alt="a" />
