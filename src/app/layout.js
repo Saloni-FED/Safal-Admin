@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/ico.png" />
+        <link rel="icon" href="/assests/ico.png" />
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
       </head>

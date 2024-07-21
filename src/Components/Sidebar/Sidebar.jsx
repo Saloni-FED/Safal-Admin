@@ -57,6 +57,20 @@ const Sidebar = ({ toggle }) => {
           <Image src={img} alt="Partners" />
           <Link href="/unlistedsharesquestions">Unlisted Shares Contact</Link>
         </div>
+        <div
+          onClick={() => handleClick("insurance")}
+          className={clicked === "insurance" ? "sideClicked" : ""}
+        >
+          <Image src={img} alt="Partners" />
+          <Link href="/insurance">Insurance</Link>
+        </div>
+        <div
+          onClick={() => handleClick("mutual")}
+          className={clicked === "mutual" ? "sideClicked" : ""}
+        >
+          <Image src={img} alt="Partners" />
+          <Link href="/mutual">Mutual Funds</Link>
+        </div>
 
        
       </div>
